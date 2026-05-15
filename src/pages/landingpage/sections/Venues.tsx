@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, Clock, Mail, Phone, Wifi, Zap, Calendar } from 'lucide-react';
+import { MapPin, Clock, Wifi, Zap, Calendar } from 'lucide-react';
 import { useSiteStore } from '../../../store/siteStore';
 import Badge from '../../../components/ui/Badge';
 
@@ -107,7 +107,7 @@ export default function Venues() {
                     <h4 className="font-body text-[10px] text-brand-gray uppercase tracking-widest mb-1">Status</h4>
                     <div className="flex items-center gap-2">
                       <p className="font-body text-sm text-brand-cream/80 leading-relaxed">Open Daily</p>
-                      <Badge label="Active" variant="success" className="scale-75 origin-left" />
+                      <Badge label="Open" className="scale-75 origin-left" />
                     </div>
                   </div>
                 </div>
