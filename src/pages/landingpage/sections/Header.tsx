@@ -4,6 +4,22 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MapPin, Facebook, Instagram } from 'lucide-react';
 import logo2 from '@assets/Logo/Logo2.png';
 
+const TikTokIcon = ({ size = 16, className = "" }: { size?: number, className?: string }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    width={size} 
+    height={size} 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
+
 const navLinks = [
   { label: 'Home', href: '/', isAnchor: true, anchor: '#hero' },
   { label: 'Menu', href: '/menu', isAnchor: false },
@@ -105,6 +121,15 @@ export default function Header() {
             >
               <Instagram size={16} />
             </a>
+            <a
+              href="https://www.tiktok.com/@thezamoraroom"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-cream/60 hover:text-brand-gold transition-colors duration-300"
+              aria-label="TikTok"
+            >
+              <TikTokIcon size={16} />
+            </a>
           </div>
           <button
             onClick={() => {
@@ -188,6 +213,14 @@ export default function Header() {
                   className="text-brand-gray hover:text-brand-gold transition-colors duration-200"
                 >
                   <Instagram size={20} />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@thezamoraroom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-gray hover:text-brand-gold transition-colors duration-200"
+                >
+                  <TikTokIcon size={20} />
                 </a>
               </div>
             </div>

@@ -2,6 +2,22 @@ import { Link, useLocation } from 'react-router-dom';
 import { MapPin, Mail, Phone, Facebook, Instagram } from 'lucide-react';
 import footerLogo from '../../../assets/footer/logo.png';
 
+const TikTokIcon = ({ size = 18, className = "" }: { size?: number, className?: string }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    width={size} 
+    height={size} 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
+
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Menu', href: '/menu' },
@@ -59,6 +75,15 @@ export default function Footer() {
                 aria-label="Instagram"
               >
                 <Instagram size={18} />
+              </a>
+              <a
+                href="https://www.tiktok.com/@thezamoraroom"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-gray/60 hover:text-brand-gold transition-colors duration-300"
+                aria-label="TikTok"
+              >
+                <TikTokIcon size={18} />
               </a>
             </div>
           </div>
