@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base resets ── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-brand-black text-brand-cream font-body;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Editorial Typography System */
+  .font-display-serif {
+    font-family: 'DM Serif Display', serif;
+  }
+
+  ::selection {
+    background-color: rgba(200, 150, 42, 0.3);
+    color: #f5f0e8;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0906;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #8a8275;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c8962a;
+  }
+
+  img {
+    transition: opacity 0.3s ease;
+  }
+}
