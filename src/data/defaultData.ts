@@ -25,10 +25,10 @@ import moment6 from '../assets/Captured Moments/image5.png';
 import capImage from '../assets/merchandise/cap.png';
 
 export const defaultHero: HeroData = {
-  title: 'COFFEE\nLAB',
-  subtitle: 'Artisan Brews | Local Craft | Your Daily Ritual',
+  title: 'THE ZAMORA\nROOM',
+  subtitle: 'Artisan Brews | Local Craft | Coffee Lab',
   ctaLabel: 'Our Menu',
-  ctaLink: '#stores',
+  ctaLink: '#venues',
   bgImage: herobackground,
 };
 

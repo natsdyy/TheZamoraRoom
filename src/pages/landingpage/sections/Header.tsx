@@ -8,6 +8,7 @@ const navLinks = [
   { label: 'Home', href: '/', isAnchor: true, anchor: '#hero' },
   { label: 'Menu', href: '/menu', isAnchor: false },
   { label: 'Merchandise', href: '/merchandise', isAnchor: false },
+  { label: 'Our Venue', href: '/#venues', isAnchor: true, anchor: '#venues' },
 ];
 
 export default function Header() {
@@ -108,15 +109,15 @@ export default function Header() {
           <button
             onClick={() => {
               if (location.pathname === '/') {
-                document.querySelector('#stores')?.scrollIntoView({ behavior: 'smooth' });
+                document.querySelector('#venues')?.scrollIntoView({ behavior: 'smooth' });
               } else {
-                navigate('/#stores');
+                navigate('/#venues');
               }
             }}
             className="inline-flex rounded-full items-center gap-2 border border-white/15 text-brand-cream/80 px-4 py-1.5 text-xs font-body tracking-wider uppercase hover:border-brand-gold hover:text-brand-gold transition-all duration-200"
           >
             <MapPin size={12} className="text-brand-gold" />
-            Find a Store
+            Our Venue
           </button>
         </div>
 
@@ -160,15 +161,15 @@ export default function Header() {
                 onClick={() => {
                   setMenuOpen(false);
                   if (location.pathname === '/') {
-                    document.querySelector('#stores')?.scrollIntoView({ behavior: 'smooth' });
+                    document.querySelector('#venues')?.scrollIntoView({ behavior: 'smooth' });
                   } else {
-                    navigate('/#stores');
+                    navigate('/#venues');
                   }
                 }}
                 className="inline-flex rounded-full items-center gap-2 border border-white/15 text-brand-cream/80 px-4 py-2 text-xs font-body tracking-wider uppercase w-fit mt-1"
               >
                 <MapPin size={12} className="text-brand-gold" />
-                Find a Store
+                Our Venue
               </button>
               
               <div className="flex items-center gap-5 mt-4 pt-4 border-t border-white/5">
