@@ -1,9 +1,10 @@
 import Hero from './landingpage/sections/Hero';
 import About from './landingpage/sections/About';
 import VideoReel from './landingpage/sections/VideoReel';
+import SocialReels from './landingpage/sections/SocialReels';
 import CapturedMoments from './landingpage/sections/CapturedMoments';
 import Merchandise from './landingpage/sections/Merchandise';
-import Stores from './landingpage/sections/Stores';
+import Venues from './landingpage/sections/Venues';
 import Footer from './landingpage/sections/Footer';
 
 export default function LandingPage() {
@@ -12,9 +13,10 @@ export default function LandingPage() {
       <Hero />
       <About />
       <VideoReel />
+      <SocialReels />
       <CapturedMoments />
       <Merchandise />
-      <Stores />
+      <Venues />
       <Footer />
     </div>
   );

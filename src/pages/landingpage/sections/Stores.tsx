@@ -74,6 +74,18 @@ export default function Stores() {
                   </a>
                 </div>
               </div>
+
+              {/* Amenities */}
+              {store.amenities && store.amenities.length > 0 && (
+                <div className="mt-6 pt-6 border-t border-white/5 flex flex-wrap gap-3">
+                  {store.amenities.map((amenity, i) => (
+                    <div key={i} className="flex items-center gap-1.5 px-3 py-1 bg-white/5 rounded-full">
+                      <span className="w-1 h-1 rounded-full bg-brand-gold" />
+                      <span className="text-[10px] font-body text-brand-gray/70 uppercase tracking-wider">{amenity}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>

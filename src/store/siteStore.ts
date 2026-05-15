@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { HeroData, Moment, Testimonial, MerchItem, Store, MenuItem, VideoReelData } from '../types';
+import type { HeroData, Moment, SocialReel, Testimonial, MerchItem, Store, MenuItem, VideoReelData } from '../types';
 import {
   defaultHero,
   defaultMoments,
@@ -8,11 +8,13 @@ import {
   defaultStores,
   defaultMenuItems,
   defaultVideoReel,
+  defaultSocialReels,
 } from '../data/defaultData';
 
 interface SiteState {
   hero: HeroData;
   moments: Moment[];
+  socialReels: SocialReel[];
   testimonials: Testimonial[];
   merch: MerchItem[];
   stores: Store[];
@@ -29,6 +31,11 @@ interface SiteState {
   addMoment: (moment: Moment) => void;
   updateMoment: (id: string, data: Partial<Moment>) => void;
   deleteMoment: (id: string) => void;
+
+  // Social Reels CRUD
+  addSocialReel: (reel: SocialReel) => void;
+  updateSocialReel: (id: string, data: Partial<SocialReel>) => void;
+  deleteSocialReel: (id: string) => void;
 
   // Testimonials CRUD
   addTestimonial: (testimonial: Testimonial) => void;
@@ -59,6 +66,7 @@ export const useSiteStore = create<SiteState>((set) => ({
   stores: defaultStores,
   menu: defaultMenuItems,
   videoReel: defaultVideoReel,
+  socialReels: defaultSocialReels,
 
   // Hero
   updateHero: (data) =>
@@ -77,6 +85,16 @@ export const useSiteStore = create<SiteState>((set) => ({
     })),
   deleteMoment: (id) =>
     set((state) => ({ moments: state.moments.filter((m) => m.id !== id) })),
+
+  // Social Reels
+  addSocialReel: (reel) =>
+    set((state) => ({ socialReels: [...state.socialReels, reel] })),
+  updateSocialReel: (id, data) =>
+    set((state) => ({
+      socialReels: state.socialReels.map((r) => (r.id === id ? { ...r, ...data } : r)),
+    })),
+  deleteSocialReel: (id) =>
+    set((state) => ({ socialReels: state.socialReels.filter((r) => r.id !== id) })),
 
   // Testimonials
   addTestimonial: (testimonial) =>

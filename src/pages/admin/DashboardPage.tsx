@@ -6,9 +6,9 @@ import Button from '../../components/ui/Button';
 import StarRating from '../../components/ui/StarRating';
 import Badge from '../../components/ui/Badge';
 import { Trash2, Plus, Save, Pencil, X, Video } from 'lucide-react';
-import type { Moment, Testimonial, MerchItem, Store, MenuItem } from '../../types';
+import type { Moment, SocialReel, Testimonial, MerchItem, Store, MenuItem } from '../../types';
 
-type Tab = 'hero' | 'video' | 'menu' | 'moments' | 'testimonials' | 'merch' | 'stores';
+type Tab = 'hero' | 'video' | 'socialReels' | 'menu' | 'moments' | 'testimonials' | 'merch' | 'venues';
 
 export default function DashboardPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,11 +27,12 @@ export default function DashboardPage() {
   const tabs: { key: Tab; label: string }[] = [
     { key: 'hero', label: 'Hero' },
     { key: 'video', label: 'Video Reel' },
+    { key: 'socialReels', label: 'Social Reels' },
     { key: 'menu', label: 'Menu' },
     { key: 'moments', label: 'Moments' },
     { key: 'testimonials', label: 'Testimonials' },
     { key: 'merch', label: 'Merchandise' },
-    { key: 'stores', label: 'Stores' },
+    { key: 'venues', label: 'Venues' },
   ];
 
   return (
@@ -55,11 +56,12 @@ export default function DashboardPage() {
       </div>
       {activeTab === 'hero' && <HeroEditor />}
       {activeTab === 'video' && <VideoReelEditor />}
+      {activeTab === 'socialReels' && <SocialReelsEditor />}
       {activeTab === 'menu' && <MenuEditor />}
       {activeTab === 'moments' && <MomentsEditor />}
       {activeTab === 'testimonials' && <TestimonialsEditor />}
       {activeTab === 'merch' && <MerchEditor />}
-      {activeTab === 'stores' && <StoresEditor />}
+      {activeTab === 'venues' && <VenuesEditor />}
     </div>
   );
 }
@@ -105,6 +107,68 @@ function VideoReelEditor() {
         </div>
       </div>
       <Button onClick={handleSave} size="sm"><Save size={14} className="mr-2" />Save Video Reel Settings</Button>
+    </div>
+  );
+}
+
+/* ── Social Reels Editor ── */
+function SocialReelsEditor() {
+  const reels = useSiteStore((s) => s.socialReels);
+  const addSocialReel = useSiteStore((s) => s.addSocialReel);
+  const updateSocialReel = useSiteStore((s) => s.updateSocialReel);
+  const deleteSocialReel = useSiteStore((s) => s.deleteSocialReel);
+  const [editId, setEditId] = useState<string | null>(null);
+  const [form, setForm] = useState({ videoUrl: '', caption: '', thumbnail: '' });
+
+  const handleAdd = () => {
+    if (!form.videoUrl) return;
+    addSocialReel({ id: Date.now().toString(), ...form });
+    setForm({ videoUrl: '', caption: '', thumbnail: '' });
+  };
+
+  const handleUpdate = () => {
+    if (!editId) return;
+    updateSocialReel(editId, form);
+    setEditId(null);
+    setForm({ videoUrl: '', caption: '', thumbnail: '' });
+  };
+
+  const startEdit = (r: SocialReel) => {
+    setEditId(r.id);
+    setForm({ videoUrl: r.videoUrl, caption: r.caption, thumbnail: r.thumbnail || '' });
+  };
+
+  return (
+    <div>
+      <div className="max-w-xl space-y-3 mb-8">
+        <Input label="Video URL" value={form.videoUrl} onChange={(e) => setForm({ ...form, videoUrl: e.target.value })} />
+        <Input label="Caption" value={form.caption} onChange={(e) => setForm({ ...form, caption: e.target.value })} />
+        <Input label="Thumbnail URL (Optional)" value={form.thumbnail} onChange={(e) => setForm({ ...form, thumbnail: e.target.value })} />
+        <div className="flex gap-2">
+          {editId ? (
+            <>
+              <Button onClick={handleUpdate} size="sm"><Save size={14} className="mr-2" />Update Reel</Button>
+              <Button variant="ghost" size="sm" onClick={() => { setEditId(null); setForm({ videoUrl: '', caption: '', thumbnail: '' }); }}><X size={14} className="mr-1" />Cancel</Button>
+            </>
+          ) : (
+            <Button onClick={handleAdd} size="sm"><Plus size={14} className="mr-2" />Add Social Reel</Button>
+          )}
+        </div>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {reels.map((r) => (
+          <div key={r.id} className="relative group bg-brand-dark border border-white/5 overflow-hidden aspect-[9/16]">
+            <video src={r.videoUrl} className="w-full h-full object-cover opacity-50" />
+            <div className="absolute inset-0 p-3 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent">
+              <p className="text-[10px] font-body text-brand-cream truncate">{r.caption}</p>
+            </div>
+            <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button onClick={() => startEdit(r)} className="p-1.5 bg-brand-black/80 text-brand-gold hover:bg-brand-gold hover:text-brand-black transition-colors"><Pencil size={12} /></button>
+              <button onClick={() => deleteSocialReel(r.id)} className="p-1.5 bg-brand-black/80 text-red-400 hover:bg-red-500 hover:text-white transition-colors"><Trash2 size={12} /></button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -211,36 +275,37 @@ function MomentsEditor() {
   const updateMoment = useSiteStore((s) => s.updateMoment);
   const deleteMoment = useSiteStore((s) => s.deleteMoment);
   const [editId, setEditId] = useState<string | null>(null);
-  const [form, setForm] = useState({ image: '', caption: '' });
+  const [form, setForm] = useState({ image: '', videoUrl: '', caption: '' });
 
   const handleAdd = () => {
-    if (!form.image) return;
+    if (!form.image && !form.videoUrl) return;
     addMoment({ id: Date.now().toString(), ...form });
-    setForm({ image: '', caption: '' });
+    setForm({ image: '', videoUrl: '', caption: '' });
   };
 
   const handleUpdate = () => {
     if (!editId) return;
     updateMoment(editId, form);
     setEditId(null);
-    setForm({ image: '', caption: '' });
+    setForm({ image: '', videoUrl: '', caption: '' });
   };
 
   const startEdit = (m: Moment) => {
     setEditId(m.id);
-    setForm({ image: m.image, caption: m.caption });
+    setForm({ image: m.image, videoUrl: m.videoUrl || '', caption: m.caption });
   };
 
   return (
     <div>
       <div className="max-w-xl space-y-3 mb-8">
-        <Input label="Image URL" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
+        <Input label="Image URL (Required if no video)" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
+        <Input label="Video URL (Optional)" value={form.videoUrl} onChange={(e) => setForm({ ...form, videoUrl: e.target.value })} />
         <Input label="Caption" value={form.caption} onChange={(e) => setForm({ ...form, caption: e.target.value })} />
         <div className="flex gap-2">
           {editId ? (
             <>
               <Button onClick={handleUpdate} size="sm"><Save size={14} className="mr-2" />Update</Button>
-              <Button variant="ghost" size="sm" onClick={() => { setEditId(null); setForm({ image: '', caption: '' }); }}><X size={14} className="mr-1" />Cancel</Button>
+              <Button variant="ghost" size="sm" onClick={() => { setEditId(null); setForm({ image: '', videoUrl: '', caption: '' }); }}><X size={14} className="mr-1" />Cancel</Button>
             </>
           ) : (
             <Button onClick={handleAdd} size="sm"><Plus size={14} className="mr-2" />Add Moment</Button>
@@ -250,7 +315,11 @@ function MomentsEditor() {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {moments.map((m) => (
           <div key={m.id} className="relative group bg-brand-dark border border-white/5 overflow-hidden">
-            <img src={m.image} alt={m.caption} className="w-full h-32 object-cover" />
+            {m.videoUrl ? (
+              <video src={m.videoUrl} className="w-full h-32 object-cover opacity-50" />
+            ) : (
+              <img src={m.image} alt={m.caption} className="w-full h-32 object-cover" />
+            )}
             <div className="p-3">
               <p className="text-xs font-body text-brand-gray truncate">{m.caption}</p>
             </div>
@@ -410,41 +479,61 @@ function MerchEditor() {
   );
 }
 
-/* ── Stores Editor ── */
-function StoresEditor() {
+/* ── Venues Editor ── */
+function VenuesEditor() {
   const stores = useSiteStore((s) => s.stores);
   const addStore = useSiteStore((s) => s.addStore);
   const updateStore = useSiteStore((s) => s.updateStore);
   const deleteStore = useSiteStore((s) => s.deleteStore);
   const [editId, setEditId] = useState<string | null>(null);
-  const [form, setForm] = useState({ name: '', address: '', hours: '', email: '', phone: '', status: 'Open' as Store['status'] });
+  const [form, setForm] = useState({ 
+    name: '', 
+    address: '', 
+    hours: '', 
+    email: '', 
+    phone: '', 
+    status: 'Open' as Store['status'],
+    image: '',
+    secondaryImage: ''
+  });
 
   const handleAdd = () => {
     if (!form.name) return;
     addStore({ id: Date.now().toString(), ...form });
-    setForm({ name: '', address: '', hours: '', email: '', phone: '', status: 'Open' });
+    setForm({ name: '', address: '', hours: '', email: '', phone: '', status: 'Open', image: '', secondaryImage: '' });
   };
 
   const handleUpdate = () => {
     if (!editId) return;
     updateStore(editId, form);
     setEditId(null);
-    setForm({ name: '', address: '', hours: '', email: '', phone: '', status: 'Open' });
+    setForm({ name: '', address: '', hours: '', email: '', phone: '', status: 'Open', image: '', secondaryImage: '' });
   };
 
   const startEdit = (s: Store) => {
     setEditId(s.id);
-    setForm({ name: s.name, address: s.address, hours: s.hours, email: s.email, phone: s.phone, status: s.status });
+    setForm({ 
+      name: s.name, 
+      address: s.address, 
+      hours: s.hours, 
+      email: s.email, 
+      phone: s.phone, 
+      status: s.status,
+      image: s.image || '',
+      secondaryImage: s.secondaryImage || ''
+    });
   };
 
   return (
     <div>
       <div className="max-w-xl space-y-3 mb-8">
-        <Input label="Store Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+        <Input label="Venue Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
         <Input label="Address" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
         <Input label="Hours" value={form.hours} onChange={(e) => setForm({ ...form, hours: e.target.value })} />
         <Input label="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
         <Input label="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+        <Input label="Main Image URL" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
+        <Input label="Secondary Image URL" value={form.secondaryImage} onChange={(e) => setForm({ ...form, secondaryImage: e.target.value })} />
         <div>
           <p className="text-sm font-body text-brand-gray uppercase tracking-wider mb-1.5">Status</p>
           <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value as Store['status'] })} className="w-full bg-brand-black border border-white/10 text-brand-cream px-4 py-2.5 font-body text-sm focus:outline-none focus:border-brand-gold/50">
@@ -456,11 +545,11 @@ function StoresEditor() {
         <div className="flex gap-2">
           {editId ? (
             <>
-              <Button onClick={handleUpdate} size="sm"><Save size={14} className="mr-2" />Update</Button>
-              <Button variant="ghost" size="sm" onClick={() => { setEditId(null); setForm({ name: '', address: '', hours: '', email: '', phone: '', status: 'Open' }); }}><X size={14} className="mr-1" />Cancel</Button>
+              <Button onClick={handleUpdate} size="sm"><Save size={14} className="mr-2" />Update Venue</Button>
+              <Button variant="ghost" size="sm" onClick={() => { setEditId(null); setForm({ name: '', address: '', hours: '', email: '', phone: '', status: 'Open', image: '', secondaryImage: '' }); }}><X size={14} className="mr-1" />Cancel</Button>
             </>
           ) : (
-            <Button onClick={handleAdd} size="sm"><Plus size={14} className="mr-2" />Add Store</Button>
+            <Button onClick={handleAdd} size="sm"><Plus size={14} className="mr-2" />Add Venue</Button>
           )}
         </div>
       </div>
@@ -473,7 +562,10 @@ function StoresEditor() {
                 <Badge label={s.status} />
               </div>
               <p className="font-body text-xs text-brand-gray">{s.address}</p>
-              <p className="font-body text-xs text-brand-gray">{s.hours} · {s.email} · {s.phone}</p>
+              <div className="flex gap-2 mt-2">
+                {s.image && <div className="w-10 h-10 bg-white/5 rounded overflow-hidden"><img src={s.image} className="w-full h-full object-cover" /></div>}
+                {s.secondaryImage && <div className="w-10 h-10 bg-white/5 rounded overflow-hidden"><img src={s.secondaryImage} className="w-full h-full object-cover" /></div>}
+              </div>
             </div>
             <div className="flex gap-1 shrink-0">
               <button onClick={() => startEdit(s)} className="p-1.5 text-brand-gold hover:bg-brand-gold/10 transition-colors"><Pencil size={14} /></button>

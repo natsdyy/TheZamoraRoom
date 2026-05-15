@@ -1,8 +1,17 @@
-import type { HeroData, Moment, Testimonial, MerchItem, Store, MenuItem, VideoReelData } from '../types';
-import zamorarreels from '../assets/Video/zamorarreels.mp4';
-
+import type { HeroData, Moment, Testimonial, MerchItem, Store, MenuItem, VideoReelData, SocialReel } from '../types';
+import reels1 from '../assets/Video/reels1.mp4';
+import reels2 from '../assets/Video/reels2.mp4';
+import reels3 from '../assets/Video/reels3.mp4';
+import reels4 from '../assets/Video/reels4.mp4';
+import reels5 from '../assets/Video/reels5.mp4';
 // Hero
 import herobackground from '../assets/hero/herobackgound.png';
+// Crafting
+import zamorarreels from '../assets/Video/zamorarreels.mp4';
+
+// Venues
+import venue1 from '../assets/venues/venues1.png';
+import venue2 from '../assets/venues/venues2.png';
 
 // Moments
 import moment1 from '../assets/Captured Moments/image.png';
@@ -27,9 +36,17 @@ export const defaultMoments: Moment[] = [
   { id: '1', image: moment1, caption: 'Artisan Matcha & Fresh Pastries' },
   { id: '2', image: moment2, caption: 'Traditional Vietnamese Drip' },
   { id: '3', image: moment3, caption: 'Curated Single Origin Beans' },
-  { id: '4', image: moment4, caption: 'The Signature Freddo Espresso' },
+  { id: '4', image: moment4, caption: 'The Signature Freddo Espresso'},
   { id: '5', image: moment5, caption: 'Handcrafted Revel Bars' },
   { id: '6', image: moment6, caption: 'Classic Pesto Pasta' },
+];
+
+export const defaultSocialReels: SocialReel[] = [
+  { id: '1', videoUrl: reels1 , caption: 'Brewing perfection in the lab.' },
+  { id: '2', videoUrl: reels2, caption: 'The perfect morning ritual.' },
+  { id: '3', videoUrl: reels3, caption: 'Artisan craft in every cup.' },
+  { id: '4', videoUrl: reels4, caption: 'Join the Zamora Room experience.' },
+  { id: '5', videoUrl: reels5, caption: 'Signature blends you will love.' },
 ];
 
 export const defaultTestimonials: Testimonial[] = [
@@ -61,7 +78,7 @@ export const defaultMerch: MerchItem[] = [
   {
     id: '1',
     name: 'The Zamora Trucker Cap',
-    price: '₱850',
+    price: '₱-',
     tag: 'New',
     image: capImage,
   },
@@ -77,6 +94,9 @@ export const defaultStores: Store[] = [
     email: 'thezamoraroom@gmail.com',
     phone: '+63 917 517 8728',
     status: 'Open',
+    amenities: ['Wi-Fi Available', 'Power Outlets', 'Open Daily'],
+    image: venue1,
+    secondaryImage: venue2,
   },
 ];
 

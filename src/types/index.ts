@@ -9,6 +9,14 @@ export interface HeroData {
 export interface Moment {
   id: string;
   image: string;
+  videoUrl?: string;
+  caption: string;
+}
+
+export interface SocialReel {
+  id: string;
+  videoUrl: string;
+  thumbnail?: string;
   caption: string;
 }
 
@@ -36,6 +44,9 @@ export interface Store {
   email: string;
   phone: string;
   status: 'Open' | 'Coming Soon' | 'Closed';
+  amenities?: string[];
+  image?: string;
+  secondaryImage?: string;
 }
 
 export interface MenuItem {

@@ -68,22 +68,47 @@ export default function CapturedMoments() {
         cursor-pointer
       "
     >
-      <img
-        src={moment.image}
-        alt={moment.caption}
-        loading="lazy"
-        className="
-          w-full
-          h-[180px]
-          md:h-[240px]
-          lg:h-[280px]
-          object-cover
-          transition-transform
-          duration-700
-          ease-out
-          group-hover:scale-105
-        "
-      />
+      {moment.videoUrl ? (
+        <video
+          src={moment.videoUrl}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="
+            w-full
+            h-[180px]
+            md:h-[240px]
+            lg:h-[280px]
+            object-cover
+            transition-transform
+            duration-700
+            ease-out
+            group-hover:scale-105
+            grayscale-[0.4]
+            group-hover:grayscale-0
+          "
+        />
+      ) : (
+        <img
+          src={moment.image}
+          alt={moment.caption}
+          loading="lazy"
+          className="
+            w-full
+            h-[180px]
+            md:h-[240px]
+            lg:h-[280px]
+            object-cover
+            transition-transform
+            duration-700
+            ease-out
+            group-hover:scale-105
+            grayscale-[0.4]
+            group-hover:grayscale-0
+          "
+        />
+      )}
 
       {/* Overlay */}
       <div
@@ -108,6 +133,15 @@ export default function CapturedMoments() {
           </p>
         </div>
       </div>
+      
+      {/* Video Indicator */}
+      {moment.videoUrl && (
+        <div className="absolute top-2 right-2 p-1 bg-black/40 backdrop-blur-sm rounded-full text-brand-cream/60">
+          <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+      )}
     </motion.div>
   ))}
 </div>
