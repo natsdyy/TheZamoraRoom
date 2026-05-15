@@ -1,9 +1,9 @@
 import type { HeroData, Moment, Testimonial, MerchItem, Store, MenuItem, VideoReelData, SocialReel } from '../types';
-import reels1 from '../assets/Video/reels1.mp4';
-import reels2 from '../assets/Video/reels2.mp4';
-import reels3 from '../assets/Video/reels3.mp4';
-import reels4 from '../assets/Video/reels4.mp4';
-import reels5 from '../assets/Video/reels5.mp4';
+import Reels1 from '../assets/Video/Reels1.mp4';
+import Reels2 from '../assets/Video/Reels2.mp4';
+import Reels3 from '../assets/Video/Reels3.mp4';
+import Reels4 from '../assets/Video/Reels4.mp4';
+import Reels5 from '../assets/Video/Reels5.mp4';
 // Hero
 import herobackground from '../assets/hero/herobackgound.png';
 // Crafting
@@ -42,11 +42,11 @@ export const defaultMoments: Moment[] = [
 ];
 
 export const defaultSocialReels: SocialReel[] = [
-  { id: '1', videoUrl: reels1 , caption: 'Brewing perfection in the lab.' },
-  { id: '2', videoUrl: reels2, caption: 'The perfect morning ritual.' },
-  { id: '3', videoUrl: reels3, caption: 'Artisan craft in every cup.' },
-  { id: '4', videoUrl: reels4, caption: 'Join the Zamora Room experience.' },
-  { id: '5', videoUrl: reels5, caption: 'Signature blends you will love.' },
+  { id: '1', videoUrl: Reels1 , caption: 'Brewing perfection in the lab.' },
+  { id: '2', videoUrl: Reels2, caption: 'The perfect morning ritual.' },
+  { id: '3', videoUrl: Reels3, caption: 'Artisan craft in every cup.' },
+  { id: '4', videoUrl: Reels4, caption: 'Join the Zamora Room experience.' },
+  { id: '5', videoUrl: Reels5, caption: 'Signature blends you will love.' },
 ];
 
 export const defaultTestimonials: Testimonial[] = [
