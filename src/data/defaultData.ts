@@ -1,45 +1,35 @@
 import type { HeroData, Moment, Testimonial, MerchItem, Store, MenuItem, VideoReelData } from '../types';
 import zamorarreels from '../assets/Video/zamorarreels.mp4';
 
+// Hero
+import herobackground from '../assets/hero/herobackgound.png';
+
+// Moments
+import moment1 from '../assets/Captured Moments/image.png';
+import moment2 from '../assets/Captured Moments/image1.png';
+import moment3 from '../assets/Captured Moments/image2.png';
+import moment4 from '../assets/Captured Moments/image3.png';
+import moment5 from '../assets/Captured Moments/image4.png';
+import moment6 from '../assets/Captured Moments/image5.png';
+
+// Merch
+import capImage from '../assets/merchandise/cap.png';
+
 export const defaultHero: HeroData = {
   title: 'COFFEE\nLAB',
   subtitle: 'Artisan Brews | Local Craft | Your Daily Ritual',
   ctaLabel: 'Our Menu',
   ctaLink: '#stores',
-  bgImage: '/src/assets/hero/herobackgound.png',
+  bgImage: herobackground,
 };
 
 export const defaultMoments: Moment[] = [
-  {
-    id: '1',
-    image: 'src/assets/Captured Moments/image.png',
-    caption: 'Freddo Espresso',
-  },
-  {
-    id: '2',
-    image: 'src/assets/Captured Moments/image1.png',
-    caption: 'Latte Art Session',
-  },
-  {
-    id: '3',
-    image: 'src/assets/Captured Moments/image2.png',
-    caption: 'Pour Over Ritual',
-  },
-  {
-    id: '4',
-    image: 'src/assets/Captured Moments/image3.png',
-    caption: 'Morning Cortado',
-  },
-  {
-    id: '5',
-    image: 'src/assets/Captured Moments/image4.png',
-    caption: 'The Zamora Experience',
-  },
-  {
-    id: '6',
-    image: 'src/assets/Captured Moments/image5.png',
-    caption: 'Matcha Perfection',
-  },
+  { id: '1', image: moment1, caption: 'Freddo Espresso' },
+  { id: '2', image: moment2, caption: 'Latte Art Session' },
+  { id: '3', image: moment3, caption: 'Pour Over Ritual' },
+  { id: '4', image: moment4, caption: 'Morning Cortado' },
+  { id: '5', image: moment5, caption: 'The Zamora Experience' },
+  { id: '6', image: moment6, caption: 'Matcha Perfection' },
 ];
 
 export const defaultTestimonials: Testimonial[] = [
@@ -73,7 +63,7 @@ export const defaultMerch: MerchItem[] = [
     name: 'The Zamora Trucker Cap',
     price: '₱850',
     tag: 'New',
-    image: '/src/assets/merchandise/cap.png',
+    image: capImage,
   },
   
 ];
