@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Header from '../pages/landinpage/sections/Header';
+import Header from '../pages/landingpage/sections/Header';
 
 export default function PublicLayout() {
   return (

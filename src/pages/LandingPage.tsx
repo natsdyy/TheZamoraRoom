@@ -1,10 +1,10 @@
-import Hero from './landinpage/sections/Hero';
-import About from './landinpage/sections/About';
-import VideoReel from './landinpage/sections/VideoReel';
-import CapturedMoments from './landinpage/sections/CapturedMoments';
-import Merchandise from './landinpage/sections/Merchandise';
-import Stores from './landinpage/sections/Stores';
-import Footer from './landinpage/sections/Footer';
+import Hero from './landingpage/sections/Hero';
+import About from './landingpage/sections/About';
+import VideoReel from './landingpage/sections/VideoReel';
+import CapturedMoments from './landingpage/sections/CapturedMoments';
+import Merchandise from './landingpage/sections/Merchandise';
+import Stores from './landingpage/sections/Stores';
+import Footer from './landingpage/sections/Footer';
 
 export default function LandingPage() {
   return (
