@@ -24,7 +24,7 @@ export const defaultHero: HeroData = {
 };
 
 export const defaultMoments: Moment[] = [
-  { id: '1', image: moment1, caption: 'Freddo Espresso' },
+  { id: '1', image: moment1, caption: 'The Zamora Experience' },
   { id: '2', image: moment2, caption: 'Latte Art Session' },
   { id: '3', image: moment3, caption: 'Pour Over Ritual' },
   { id: '4', image: moment4, caption: 'Morning Cortado' },
