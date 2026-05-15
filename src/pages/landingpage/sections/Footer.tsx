@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { MapPin, Mail, Phone } from 'lucide-react';
+import { MapPin, Mail, Phone, Facebook, Instagram } from 'lucide-react';
 import footerLogo from '../../../assets/footer/logo.png';
 
 const navLinks = [
@@ -41,6 +41,26 @@ export default function Footer() {
               The Zamora Room – Coffee Lab is your destination for artisan brews, 
               crafted with passion and precision.
             </p>
+            <div className="flex items-center gap-4 mt-6">
+              <a
+                href="https://www.facebook.com/profile.php?id=61577349268004"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-gray/60 hover:text-brand-gold transition-colors duration-300"
+                aria-label="Facebook"
+              >
+                <Facebook size={18} />
+              </a>
+              <a
+                href="https://www.instagram.com/thezamoraroom/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-gray/60 hover:text-brand-gold transition-colors duration-300"
+                aria-label="Instagram"
+              >
+                <Instagram size={18} />
+              </a>
+            </div>
           </div>
 
           {/* Nav links */}

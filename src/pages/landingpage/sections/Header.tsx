@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { MapPin } from 'lucide-react';
+import { MapPin, Facebook, Instagram } from 'lucide-react';
 import logo2 from '@assets/Logo/Logo2.png';
 
 const navLinks = [
@@ -84,20 +84,41 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Find a Store button */}
-        <button
-          onClick={() => {
-            if (location.pathname === '/') {
-              document.querySelector('#stores')?.scrollIntoView({ behavior: 'smooth' });
-            } else {
-              navigate('/#stores');
-            }
-          }}
-          className="hidden md:inline-flex rounded-full items-center gap-2 border border-white/15 text-brand-cream/80 px-4 py-1.5 text-xs font-body tracking-wider uppercase hover:border-brand-gold hover:text-brand-gold transition-all duration-200"
-        >
-          <MapPin size={12} className="text-brand-gold" />
-          Find a Store
-        </button>
+        <div className="hidden md:flex items-center gap-4">
+          <div className="flex items-center gap-3 mr-2 border-r border-white/10 pr-4">
+            <a
+              href="https://www.facebook.com/profile.php?id=61577349268004"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-cream/60 hover:text-brand-gold transition-colors duration-300"
+              aria-label="Facebook"
+            >
+              <Facebook size={16} />
+            </a>
+            <a
+              href="https://www.instagram.com/thezamoraroom/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-cream/60 hover:text-brand-gold transition-colors duration-300"
+              aria-label="Instagram"
+            >
+              <Instagram size={16} />
+            </a>
+          </div>
+          <button
+            onClick={() => {
+              if (location.pathname === '/') {
+                document.querySelector('#stores')?.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                navigate('/#stores');
+              }
+            }}
+            className="inline-flex rounded-full items-center gap-2 border border-white/15 text-brand-cream/80 px-4 py-1.5 text-xs font-body tracking-wider uppercase hover:border-brand-gold hover:text-brand-gold transition-all duration-200"
+          >
+            <MapPin size={12} className="text-brand-gold" />
+            Find a Store
+          </button>
+        </div>
 
         {/* Mobile menu button */}
         <button
@@ -149,6 +170,25 @@ export default function Header() {
                 <MapPin size={12} className="text-brand-gold" />
                 Find a Store
               </button>
+              
+              <div className="flex items-center gap-5 mt-4 pt-4 border-t border-white/5">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61577349268004"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-gray hover:text-brand-gold transition-colors duration-200"
+                >
+                  <Facebook size={20} />
+                </a>
+                <a
+                  href="https://www.instagram.com/thezamoraroom/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-gray hover:text-brand-gold transition-colors duration-200"
+                >
+                  <Instagram size={20} />
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
