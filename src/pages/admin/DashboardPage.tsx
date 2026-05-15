@@ -6,7 +6,7 @@ import Button from '../../components/ui/Button';
 import StarRating from '../../components/ui/StarRating';
 import Badge from '../../components/ui/Badge';
 import { Trash2, Plus, Save, Pencil, X, Video } from 'lucide-react';
-import type { Moment, Testimonial, MerchItem, Store, MenuItem, VideoReelData } from '../../types';
+import type { Moment, Testimonial, MerchItem, Store, MenuItem } from '../../types';
 
 type Tab = 'hero' | 'video' | 'menu' | 'moments' | 'testimonials' | 'merch' | 'stores';
 
