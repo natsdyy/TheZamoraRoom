@@ -10,4 +10,7 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, './src/assets'),
     },
   },
+  build: {
+    sourcemap: false, // Prevents sourcemaps from exposing the original TypeScript source code in DevTools
+  },
 })

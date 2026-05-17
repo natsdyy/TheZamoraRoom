@@ -158,14 +158,31 @@ function ReelCard({ reel, onExpand }: { reel: any; onExpand: () => void }) {
           loop
           muted={isMuted}
           playsInline
-          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 pointer-events-none"
+          controlsList="nodownload nofullscreen noremoteplayback"
+          disablePictureInPicture
+          disableRemotePlayback
+          onContextMenu={(e) => e.preventDefault()}
+          style={{
+            WebkitTouchCallout: 'none',
+            WebkitUserDrag: 'none',
+          } as any}
         />
         
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
+
+        {/* Invisible Shield overlay to prevent right-click / drag downloads on the video */}
+        <div 
+          className="absolute inset-0 bg-transparent z-10"
+          onContextMenu={(e) => e.preventDefault()}
+          style={{
+            WebkitTouchCallout: 'none',
+          }}
+        />
         
         {/* Top Controls */}
-        <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
+        <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-20">
           <div className="px-2.5 py-1 bg-brand-black/40 backdrop-blur-md border border-white/10 rounded-full">
             <span className="text-[8px] text-brand-gold font-body uppercase tracking-[0.2em]">The Zamora Room</span>
           </div>
@@ -180,7 +197,7 @@ function ReelCard({ reel, onExpand }: { reel: any; onExpand: () => void }) {
         </div>
 
         {/* Bottom Content */}
-        <div className="absolute inset-0 flex flex-col justify-end p-6">
+        <div className="absolute inset-0 flex flex-col justify-end p-6 z-20">
           <p className="text-brand-cream text-xs font-body leading-relaxed mb-6 line-clamp-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
             {reel.caption}
           </p>
@@ -275,11 +292,28 @@ function ReelModal({ reel, onClose }: { reel: any; onClose: () => void }) {
           autoPlay
           loop
           muted={isMuted}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover pointer-events-none"
+          controlsList="nodownload nofullscreen noremoteplayback"
+          disablePictureInPicture
+          disableRemotePlayback
+          onContextMenu={(e) => e.preventDefault()}
+          style={{
+            WebkitTouchCallout: 'none',
+            WebkitUserDrag: 'none',
+          } as any}
+        />
+
+        {/* Invisible Shield overlay to prevent right-click / drag downloads on the video */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-transparent z-10"
+          onContextMenu={(e) => e.preventDefault()}
+          style={{
+            WebkitTouchCallout: 'none',
+          } as any}
         />
 
         {/* Modal Controls */}
-        <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+        <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-20">
           <p className="text-brand-cream text-lg font-display-serif italic mb-6">
             {reel.caption}
           </p>

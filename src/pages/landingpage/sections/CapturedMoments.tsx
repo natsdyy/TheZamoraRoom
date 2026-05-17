@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { useSiteStore } from '../../../store/siteStore';
+import ProtectedImage from '../../../components/ui/ProtectedImage';
+import ProtectedVideo from '../../../components/ui/ProtectedVideo';
 
 const testimonialsData = [
   {
@@ -69,7 +71,7 @@ export default function CapturedMoments() {
       "
     >
       {moment.videoUrl ? (
-        <video
+        <ProtectedVideo
           src={moment.videoUrl}
           autoPlay
           loop
@@ -90,7 +92,7 @@ export default function CapturedMoments() {
           "
         />
       ) : (
-        <img
+        <ProtectedImage
           src={moment.image}
           alt={moment.caption}
           loading="lazy"

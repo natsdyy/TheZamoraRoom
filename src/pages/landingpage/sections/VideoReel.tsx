@@ -75,7 +75,24 @@ export default function VideoReel() {
                 loop
                 muted={isMuted}
                 playsInline
-                className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 pointer-events-none"
+                controlsList="nodownload nofullscreen noremoteplayback"
+                disablePictureInPicture
+                disableRemotePlayback
+                onContextMenu={(e) => e.preventDefault()}
+                style={{
+                  WebkitTouchCallout: 'none',
+                  WebkitUserDrag: 'none',
+                } as any}
+              />
+
+              {/* Invisible Shield overlay to prevent right-click / drag downloads on the video */}
+              <div 
+                className="absolute inset-0 w-full h-full bg-transparent z-10"
+                onContextMenu={(e) => e.preventDefault()}
+                style={{
+                  WebkitTouchCallout: 'none',
+                } as any}
               />
 
               {/* Volume Controls Container */}
