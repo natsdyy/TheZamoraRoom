@@ -25,7 +25,7 @@ const navLinks = [
 ];
 
 const quickLinks = [
-  { label: 'Our Stores', href: '/#stores' },
+  { label: 'Our Venue', href: '/#venues' },
   { label: 'Testimonials', href: '/#testimonials' },
 ];
 
