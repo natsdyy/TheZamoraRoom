@@ -3,11 +3,65 @@ import { MapPin, Clock, Wifi, Zap, Calendar } from 'lucide-react';
 import { useSiteStore } from '../../../store/siteStore';
 import Badge from '../../../components/ui/Badge';
 
+// Helper function to check if the store is currently open based on its hour string
+function isStoreOpen(hoursStr: string): boolean {
+  try {
+    // Clean up en-dash (–), em-dash (—) and spaces
+    const normalized = hoursStr.replace(/–|—/g, '-');
+    
+    // Match patterns like "8:00 AM", "10:00 PM", "8 AM", "10 PM"
+    const timeRegex = /(\d{1,2})(?::(\d{2}))?\s*(AM|PM)/gi;
+    const matches = [...normalized.matchAll(timeRegex)];
+    
+    if (matches.length < 2) {
+      return true; // Fallback to open if string is unparseable
+    }
+    
+    const parseTimeToMinutes = (hourStr: string, minuteStr: string, ampmStr: string): number => {
+      let hour = parseInt(hourStr, 10);
+      const minutes = minuteStr ? parseInt(minuteStr, 10) : 0;
+      const ampm = ampmStr.toUpperCase();
+      
+      if (ampm === 'PM' && hour !== 12) {
+        hour += 12;
+      } else if (ampm === 'AM' && hour === 12) {
+        hour = 0;
+      }
+      
+      return hour * 60 + minutes;
+    };
+    
+    const startMinutes = parseTimeToMinutes(matches[0][1], matches[0][2], matches[0][3]);
+    const endMinutes = parseTimeToMinutes(matches[1][1], matches[1][2], matches[1][3]);
+    
+    // Get current local time in minutes
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    
+    // Handle overnight shifts (e.g. 10:00 PM to 2:00 AM)
+    if (endMinutes < startMinutes) {
+      return currentMinutes >= startMinutes || currentMinutes <= endMinutes;
+    }
+    
+    return currentMinutes >= startMinutes && currentMinutes <= endMinutes;
+  } catch (error) {
+    console.error('Error parsing store hours:', error);
+    return true; // Fallback to open on error
+  }
+}
+
 export default function Venues() {
   const stores = useSiteStore((s) => s.stores);
   const store = stores[0]; // Focus on the main/only venue
 
   if (!store) return null;
+
+  // Calculate actual dynamic status if the store is configured as "Open" in the dashboard
+  let currentStatus = store.status;
+  if (store.status === 'Open') {
+    const isOpen = isStoreOpen(store.hours);
+    currentStatus = isOpen ? 'Open' : 'Closed';
+  }
 
   return (
     <section id="venues" className="py-20 md:py-32 bg-brand-black overflow-hidden">
@@ -106,8 +160,10 @@ export default function Venues() {
                   <div>
                     <h4 className="font-body text-[10px] text-brand-gray uppercase tracking-widest mb-1">Status</h4>
                     <div className="flex items-center gap-2">
-                      <p className="font-body text-sm text-brand-cream/80 leading-relaxed">Open Daily</p>
-                      <Badge label="Open" className="scale-75 origin-left" />
+                      <p className="font-body text-sm text-brand-cream/80 leading-relaxed">
+                        {currentStatus === 'Open' ? 'Open Daily' : currentStatus}
+                      </p>
+                      <Badge label={currentStatus} className="scale-75 origin-left" />
                     </div>
                   </div>
                 </div>

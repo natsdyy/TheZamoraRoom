@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const ADMIN_PASSWORD = 'zamora2026';
+const ADMIN_PASSWORD = 'zamoracheckout2937';
 const AUTH_KEY = 'zamora_auth';
 
 interface AuthState {
