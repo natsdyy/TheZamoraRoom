@@ -4,6 +4,9 @@ import { useSiteStore } from '../../store/siteStore';
 import Header from './sections/Header';
 import Footer from './sections/Footer';
 import menuHeroBg from '@/assets/hero/herobackgound4.png';
+import coffee1 from '@/assets/coffee/coffee1.png';
+import coffee2 from '@/assets/coffee/coffee2.png';
+import ProtectedImage from '../../components/ui/ProtectedImage';
 
 export default function MenuPage() {
   const menuItems = useSiteStore((s) => s.menu);
@@ -49,6 +52,53 @@ export default function MenuPage() {
               The Menu
             </h1>
           </motion.div>
+        </section>
+
+        {/* Dynamic Craft Spotlight Banner */}
+        <section className="py-12 bg-gradient-to-b from-brand-black to-brand-dark/50 border-b border-white/5">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+              {/* Highlight Card 1 */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="group relative aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden border border-white/5 bg-brand-dark/30 shadow-xl"
+              >
+                <ProtectedImage 
+                  src={coffee1} 
+                  alt="Artisan Espresso Extraction" 
+                  className="w-full h-full object-cover grayscale-[0.25] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-20 pointer-events-none" />
+                <div className="absolute bottom-4 left-4 z-30 pointer-events-none">
+                  <p className="font-body text-brand-gold text-[9px] tracking-[0.3em] uppercase mb-1">Extraction</p>
+                  <h4 className="font-display text-base text-brand-cream tracking-wider uppercase">Artisan Espresso</h4>
+                </div>
+              </motion.div>
+
+              {/* Highlight Card 2 */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="group relative aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden border border-white/5 bg-brand-dark/30 shadow-xl"
+              >
+                <ProtectedImage 
+                  src={coffee2} 
+                  alt="Signature Pour-Over" 
+                  className="w-full h-full object-cover grayscale-[0.25] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-20 pointer-events-none" />
+                <div className="absolute bottom-4 left-4 z-30 pointer-events-none">
+                  <p className="font-body text-brand-gold text-[9px] tracking-[0.3em] uppercase mb-1">Brewing Science</p>
+                  <h4 className="font-display text-base text-brand-cream tracking-wider uppercase">Signature Pour-Over</h4>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </section>
 
         <div className="max-w-4xl mx-auto px-6 lg:px-8 py-20">

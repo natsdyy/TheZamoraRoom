@@ -6,10 +6,12 @@ import CapturedMoments from './landingpage/sections/CapturedMoments';
 import Merchandise from './landingpage/sections/Merchandise';
 import Venues from './landingpage/sections/Venues';
 import Footer from './landingpage/sections/Footer';
+import AnnouncementModal from '../components/ui/AnnouncementModal';
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col">
+      <AnnouncementModal />
       <Hero />
       <About />
       <VideoReel />

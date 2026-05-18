@@ -4,6 +4,7 @@ import Reels2 from '../assets/Video/Reels2.mp4';
 import Reels3 from '../assets/Video/Reels3.mp4';
 import Reels4 from '../assets/Video/Reels4.mp4';
 import Reels5 from '../assets/Video/Reels5.mp4';
+import Reels6 from '../assets/Video/Reels6.mp4';
 // Hero
 import herobackground from '../assets/hero/herobackgound.png';
 // Crafting
@@ -20,6 +21,7 @@ import moment3 from '../assets/Captured Moments/image2.png';
 import moment4 from '../assets/Captured Moments/image3.png';
 import moment5 from '../assets/Captured Moments/image4.png';
 import moment6 from '../assets/Captured Moments/image5.png';
+
 
 // Merch
 import capImage from '../assets/merchandise/cap.png';
@@ -39,14 +41,17 @@ export const defaultMoments: Moment[] = [
   { id: '4', image: moment4, caption: 'The Signature Freddo Espresso'},
   { id: '5', image: moment5, caption: 'Handcrafted Revel Bars' },
   { id: '6', image: moment6, caption: 'Classic Pesto Pasta' },
+
 ];
 
 export const defaultSocialReels: SocialReel[] = [
+  { id: '6', videoUrl: Reels6, caption: 'Monday na naman' },
   { id: '1', videoUrl: Reels1 , caption: 'Brewing perfection in the lab.' },
   { id: '2', videoUrl: Reels2, caption: 'The perfect morning ritual.' },
   { id: '3', videoUrl: Reels3, caption: 'Artisan craft in every cup.' },
   { id: '4', videoUrl: Reels4, caption: 'Join the Zamora Room experience.' },
   { id: '5', videoUrl: Reels5, caption: 'Signature blends you will love.' },
+ 
 ];
 
 export const defaultTestimonials: Testimonial[] = [
