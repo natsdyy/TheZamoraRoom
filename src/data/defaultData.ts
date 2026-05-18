@@ -4,7 +4,7 @@ import Reels2 from '../assets/Video/Reels2.mp4';
 import Reels3 from '../assets/Video/Reels3.mp4';
 import Reels4 from '../assets/Video/Reels4.mp4';
 import Reels5 from '../assets/Video/Reels5.mp4';
-import Reels6 from '../assets/Video/Reels6.mp4';
+import Reels6 from '../assets/Video/reels6.mp4';
 // Hero
 import herobackground from '../assets/hero/herobackgound.png';
 // Crafting
