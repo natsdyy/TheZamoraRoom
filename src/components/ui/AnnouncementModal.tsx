@@ -4,9 +4,12 @@ import { X, Clock } from 'lucide-react';
 import ProtectedImage from './ProtectedImage';
 import Button from './Button';
 import modalImage from '../../assets/Captured Moments/modal.png';
+import modal1Image from '../../assets/Captured Moments/modal1.png';
+import modal2Image from '../../assets/Captured Moments/modal2.png';
 
 export default function AnnouncementModal() {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentModalImage, setCurrentModalImage] = useState(modalImage);
 
   useEffect(() => {
     // Check if dismissed in this session
@@ -25,25 +28,21 @@ export default function AnnouncementModal() {
 
       const now = new Date();
       
-      // Determine time in Manila Standard Time (PST, UTC+8)
+      // Determine time and day in Manila Standard Time (PST, UTC+8)
       let manilaHour = now.getHours();
+      let manilaDay = now.getDay();
       
       try {
-        const formatter = new Intl.DateTimeFormat('en-US', {
-          timeZone: 'Asia/Manila',
-          hour: 'numeric',
-          hour12: false
-        });
-        
-        const parts = formatter.formatToParts(now);
-        for (const part of parts) {
-          if (part.type === 'hour') manilaHour = parseInt(part.value, 10);
-        }
+        const manilaString = now.toLocaleString('en-US', { timeZone: 'Asia/Manila' });
+        const manilaDate = new Date(manilaString);
+        manilaHour = manilaDate.getHours();
+        manilaDay = manilaDate.getDay();
       } catch (e) {
         // Fallback: manually shift to UTC+8
         const utc = now.getTime() + now.getTimezoneOffset() * 60000;
         const manilaDate = new Date(utc + 3600000 * 8);
         manilaHour = manilaDate.getHours();
+        manilaDay = manilaDate.getDay();
       }
 
       // Open hours: 8:00 AM (8) to 10:00 PM (22)
@@ -52,6 +51,17 @@ export default function AnnouncementModal() {
 
       if (open) {
         setIsVisible(true);
+        // Set correct image based on day:
+        // Monday (1): modal.png
+        // Tuesday (2), Thursday (4), Saturday (6): modal1.png
+        // Wednesday (3), Friday (5), Sunday (0): modal2.png
+        if (manilaDay === 1) {
+          setCurrentModalImage(modalImage);
+        } else if (manilaDay === 2 || manilaDay === 4 || manilaDay === 6) {
+          setCurrentModalImage(modal1Image);
+        } else {
+          setCurrentModalImage(modal2Image);
+        }
       } else {
         setIsVisible(false);
       }
@@ -104,7 +114,7 @@ export default function AnnouncementModal() {
             {/* Image Section: Displays full uncropped illustration at maximum view width */}
             <div className="w-full relative overflow-hidden flex items-center justify-center bg-brand-black">
               <ProtectedImage
-                src={modalImage}
+                src={currentModalImage}
                 alt="We Are Now Open - The Zamora Room"
                 className="w-full h-auto object-contain max-h-[75vh]"
               />
